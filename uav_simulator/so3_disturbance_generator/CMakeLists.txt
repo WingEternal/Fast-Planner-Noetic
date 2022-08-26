@@ -57,20 +57,22 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(Armadillo REQUIRED)
 include_directories(${ARMADILLO_INCLUDE_DIRS})
 
-catkin_package()
+catkin_package(
+  CATKIN_DEPENDS visualization_msgs pose_utils
+)
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(include)
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
 add_executable(so3_disturbance_generator src/so3_disturbance_generator.cpp)
-add_dependencies(so3_disturbance_generator ${PROJECT_NAME}_gencfg)
+# add_dependencies(so3_disturbance_generator ${PROJECT_NAME}_gencfg)
 target_link_libraries(so3_disturbance_generator 
    ${catkin_LIBRARIES}
    ${ARMADILLO_LIBRARIES}
-   pose_utils 
+   ${pose_utils_LIBRARIES}
 )
 

@@ -132,7 +132,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES irobot_msgs
-   CATKIN_DEPENDS geometry_msgs nav_msgs quadrotor_msgs
+   CATKIN_DEPENDS geometry_msgs nav_msgs quadrotor_msgs pose_utils
 #  DEPENDS system_lib
 )
 
@@ -160,13 +160,13 @@ add_executable(multi_map_visualization src/multi_map_visualization.cc)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-add_dependencies(multi_map_visualization multi_map_server_messages_cpp)
+add_dependencies(multi_map_visualization multi_map_server_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(multi_map_visualization 
    ${catkin_LIBRARIES}
    ${ARMADILLO_LIBRARIES}
-   pose_utils
+   ${pose_utils_LIBRARIES}
 )
 
 #############

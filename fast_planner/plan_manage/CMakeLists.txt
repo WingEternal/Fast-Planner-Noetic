@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(plan_manage)
 
 set(CMAKE_BUILD_TYPE "Release")
-set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_FLAGS "-std=c++14")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
 
 find_package(Eigen3 REQUIRED)
@@ -58,6 +58,7 @@ add_executable(fast_planner_node
   src/topo_replan_fsm.cpp
   src/planner_manager.cpp
   )
+add_dependencies(fast_planner_node plan_manage_generate_messages_cpp)
 target_link_libraries(fast_planner_node 
   ${catkin_LIBRARIES}
   )

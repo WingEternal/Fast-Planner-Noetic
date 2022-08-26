@@ -125,7 +125,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES irobot_msgs
-#  CATKIN_DEPENDS geometry_msgs nav_msgs
+ CATKIN_DEPENDS sensor_msgs nav_msgs visualization_msgs quadrotor_msgs pose_utils
 #  DEPENDS system_lib
 )
 
@@ -154,12 +154,13 @@ add_executable(odom_visualization src/odom_visualization.cpp)
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(multi_map_visualization multi_map_server_messages_cpp)
+add_dependencies(odom_visualization ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(odom_visualization
    ${catkin_LIBRARIES}
    ${ARMADILLO_LIBRARIES}
-   pose_utils
+   ${pose_utils_LIBRARIES}
 )
 
 #############

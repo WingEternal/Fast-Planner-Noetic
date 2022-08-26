@@ -9,7 +9,7 @@
   <run_depend>roscpp</run_depend>
   <export>
     <cpp cflags="-I${prefix}/include"
-         lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib"/>
+         lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lpose_utils"/>
   </export>
 
 </package>
