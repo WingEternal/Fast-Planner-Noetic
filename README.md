@@ -41,7 +41,7 @@ Please kindly star :star: this project if it helps you. We take great efforts to
 
 ## Table of Contents
 
-* [Quick Start](#1-Quick-Start)
+* [Quick Start](#1-Quick-start-with-Ubuntu-20.04)
 * [Algorithms and Papers](#2-Algorithms-and-Papers)
 * [Setup and Config](#3-Setup-and-Config)
 * [Run Simulations](#4-run-simulations)
@@ -67,18 +67,17 @@ After that, run the following commands to setup fast-planner
   sudo apt-get install libarmadillo-dev
   cd ${YOUR_WORKSPACE_PATH}/src
   git clone https://github.com/WingEternal/Fast-Planner-Noetic.git
-  cd ../ 
-  catkin_make
+  catkin build
 ```
 You may check the detailed [instruction](#3-setup-and-config) to setup the project. 
 After compilation you can start the visualization by: 
 
 ```
-  source devel/setup.bash && roslaunch plan_manage rviz.launch
+  source devel/setup.zsh && roslaunch plan_manage rviz.launch
 ```
 and start a simulation (run in a new terminals): 
 ```
-  source devel/setup.bash && roslaunch plan_manage kino_replan.launch
+  source devel/setup.zsh && roslaunch plan_manage kino_replan.launch
 ```
 You will find the random map and the drone in ```Rviz```. You can select goals for the drone to reach using the ```2D Nav Goal``` tool. A sample simulation is showed [here](#demo1).
 
@@ -120,14 +119,14 @@ Besides the folder __fast_planner__, a lightweight __uav_simulator__ is used for
 
 1. The origin software (from HKUST-Aerial-Robotics) is developed and tested in Ubuntu 16.04(ROS Kinetic) and 18.04(ROS Melodic). 
    
-2. We use [**NLopt**](https://nlopt.readthedocs.io/en/latest/NLopt_Installation) to solve the non-linear optimization problem. The __uav_simulator__ depends on the C++ linear algebra library __Armadillo__. The libarmadillo can be installed by the following command, in which `${ROS_VERSION_NAME}` is the name of your ROS release, while the NLopt should be installed by source as mentioned [above](#1-Quick-Start).
+2. We use [**NLopt**](https://nlopt.readthedocs.io/en/latest/NLopt_Installation) to solve the non-linear optimization problem. The __uav_simulator__ depends on the C++ linear algebra library __Armadillo__. The libarmadillo can be installed by the following command, in which `${ROS_VERSION_NAME}` is the name of your ROS release, while the NLopt should be installed by source as mentioned [above](#1-Quick-start-with-Ubuntu-20.04).
 ``` 
 sudo apt-get install libarmadillo-dev
 ```
 
 1. ROS Noetic with Ubuntu 20.04 is often installed with PCL 1.10, which forces code to be compiled with C++14. CMAKE_CXX_FLAGS is added for those packages using PCL. 
    
-2. The crashes mentioned in [here](https://github.com/HKUST-Aerial-Robotics/Fast-Planner/issues/117#issue-962869722) is caused by the missing return value of **KinodynamicAstar::timeToIndex** (causing std::bad_alloc of PathNode) and **EDTEnvironment::interpolateTrilinear** && **EDTEnvironment::evaluateEDTWithGrad** (causing SIGSEGV when the plan_env package is compiled in Release mode). `std::make_pair` is added as the return value. Changing the function return value from `pair<>` to `void` may also solve this problem.
+2. The crashes mentioned in [here](https://github.com/HKUST-Aerial-Robotics/Fast-Planner/issues/117#issue-962869722) is caused by the missing return value of **KinodynamicAstar::timeToIndex** (causing `std::bad_alloc`) and **EDTEnvironment::interpolateTrilinear** && **EDTEnvironment::evaluateEDTWithGrad** (causing SIGSEGV when the plan_env package is compiled in Release mode). `std::make_pair` is added as the return value. Changing the function return value from `pair<>` to `void` may also solve this problem.
 
 
 ### Build on ROS
@@ -138,7 +137,7 @@ After the prerequisites are satisfied, you can clone this repository to your cat
   cd ${YOUR_WORKSPACE_PATH}/src
   git clone https://github.com/WingEternal/Fast-Planner-Noetic.git
   cd ../
-  catkin_make
+  catkin build
 ```
 
 If you encounter problems in this step, please first refer to existing __issues__, __pull requests__ and __Google__ before raising a new issue.
@@ -171,7 +170,7 @@ Run [Rviz](http://wiki.ros.org/rviz) with our configuration firstly:
 
 ```
   <!-- go to your workspace and run: -->
-  source devel/setup.bash
+  source devel/setup.zsh
   roslaunch plan_manage rviz.launch
 ```
 
@@ -186,7 +185,7 @@ To test this method, run:
 
 ```
   <!-- open a new terminal, go to your workspace and run: -->
-  source devel/setup.bash
+  source devel/setup.zsh
   roslaunch plan_manage kino_replan.launch
 ```
 
@@ -208,7 +207,7 @@ Similarly, run:
 
 ```
   <!-- open a new terminal, go to your workspace and run: -->
-  source devel/setup.bash
+  source devel/setup.zsh
   roslaunch plan_manage topo_replan.launch
 ```
 
